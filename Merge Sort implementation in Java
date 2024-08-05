@@ -1,0 +1,65 @@
+Merge Sort 
+
+Implementation in Java.
+
+Time Complexity - O(nlogn).
+
+Code(Leetcode-based):
+
+class Solution
+{
+    private static int[] merge(int[] a, int low, int mid, int high){
+        int left = low;
+        int right = mid+1;
+        int i = 0;
+        int[] temp = new int[high-low+1]; 
+
+        while(left<=mid && right<= high){
+            if(a[left] < a[right]){
+                temp[i] = a[left]; 
+                left++;
+            }
+            else{
+                temp[i] = a[right];
+                right++;
+            }
+            i++;
+        }
+
+        while(left<=mid){
+            temp[i] = a[left];
+            i++;
+            left++;
+        }
+
+        while(right<=high){
+            temp[i] = a[right];
+            i++;
+            right++;
+        }
+
+        for(int j = 0; j<temp.length; j++){
+            a[low+j] = temp[j];
+        }
+
+        return a;
+    }
+
+    public static int[] mergeSort(int[] a, int low, int high){
+        if(low>=high) return a;
+
+        int mid = (low + high) / 2;
+        mergeSort(a, low, mid);
+        mergeSort(a, mid+1, high);
+        merge(a, low, mid, high);
+
+        return a; 
+    }
+    
+    public static void sort012(int a[], int n)
+    {
+        int low = 0;
+        int high = n - 1;
+        mergeSort(a, low, high);
+    }
+}
