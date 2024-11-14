@@ -19,7 +19,7 @@ Adjusting the Search Range:
 If the midpoint mid is feasible, narrow the search range to potentially lower values (high = mid - 1), seeking the smallest possible maximum.
 If mid is not feasible, increase the search range (low = mid + 1) to allow for a higher load per store.
 
-Solution Code:
+Solution Code(Java):
 class Solution {
     public static boolean isFeasible(int mid, int n, int[] quantities){
         int reqdStores = 0;
