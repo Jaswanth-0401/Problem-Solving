@@ -1,0 +1,86 @@
+// Singly Linked List Implementation
+class Node {
+    int val;
+    Node next;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+public class MyLinkedList {
+
+    private Node head;
+
+    public MyLinkedList() {
+        this.head = null;
+    }
+
+    // Get value at index (0-based), return -1 if invalid
+    public int get(int index) {
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            if (temp == null) return -1;
+            temp = temp.next;
+        }
+        return temp != null ? temp.val : -1;
+    }
+
+    // Add new node at the head
+    public void addAtHead(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Add new node at the tail
+    public void addAtTail(int val) {
+        Node newNode = new Node(val);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
+    // Add new node before the given index
+    public void addAtIndex(int index, int val) {
+        if (index == 0) {
+            addAtHead(val);
+            return;
+        }
+        Node newNode = new Node(val);
+        Node temp = head;
+        for (int i = 0; temp != null && i < index - 1; i++) {
+            temp = temp.next;
+        }
+        if (temp == null) {
+            System.out.println("Node cannot be inserted at index " + index);
+            return;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
+    // Delete node at given index
+    public void deleteAtIndex(int index) {
+        if (index == 0) {
+            if (head != null) head = head.next;
+            return;
+        }
+        Node temp = head;
+        for (int i = 0; temp != null && i < index - 1; i++) {
+            temp = temp.next;
+        }
+        if (temp == null || temp.next == null) {
+            System.out.println("Node cannot be deleted at index " + index);
+            return;
+        }
+        temp.next = temp.next.next;
+    }
+}
